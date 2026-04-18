@@ -1,0 +1,34 @@
+<idea-plugin>
+    <id>com.github.bgalek.move-to-version-catalog</id>
+    <name>Move to version catalog</name>
+    <vendor email="plugins@galek.dev" url="https://github.com/bgalek">bgalek</vendor>
+    <description><![CDATA[
+      <p>A focused intention for Gradle Kotlin DSL projects: move a hardcoded dependency or plugin
+        coordinate from <code>build.gradle.kts</code> into the Gradle version catalog at
+        <code>gradle/libs.versions.toml</code>.</p>
+      <h3>What it does</h3>
+      <ul>
+        <li>Adds the coordinate under <code>[libraries]</code> (for <code>dependencies { }</code>) or
+          <code>[plugins]</code> (for <code>plugins { }</code>) in <code>libs.versions.toml</code>.</li>
+        <li>Replaces the call site with <code>libs.&lt;alias&gt;</code> or
+          <code>alias(libs.plugins.&lt;alias&gt;)</code>.</li>
+      </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.gradle</depends>
+    <depends>org.toml.lang</depends>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK1="true" supportsK2="true"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <intentionAction>
+            <language>kotlin</language>
+            <className>com.github.bgalek.movetoversioncatalog.MoveToVersionCatalogIntention</className>
+            <category>Gradle</category>
+        </intentionAction>
+    </extensions>
+</idea-plugin>
