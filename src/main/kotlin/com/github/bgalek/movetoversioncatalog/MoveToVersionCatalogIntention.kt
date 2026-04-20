@@ -108,7 +108,7 @@ class MoveToVersionCatalogIntention : PsiElementBaseIntentionAction() {
             null,
             default,
             validator,
-        )?.takeIf { it.isNotBlank() }
+        )?.takeIf { it.isNotBlank() }?.replace('.', '-')
     }
 
     private fun findTarget(element: PsiElement): ExtractTarget? {

@@ -86,7 +86,22 @@ object VersionCatalog {
             val suffix = if (text.endsWith("\n") || text.isEmpty()) "" else "\n"
             "$text$suffix\n${section.header}\n$entry\n"
         } else {
-            val insertAt = text.indexOf('\n', headerIndex).let { if (it < 0) text.length else it + 1 }
+            val sectionStart = text.indexOf('\n', headerIndex).let { if (it < 0) text.length else it + 1 }
+            val nextHeader = Regex("(?m)^\\[[^]]+]")
+                .find(text, sectionStart)
+                ?.range?.first
+                ?: text.length
+            var insertAt = nextHeader
+            while (insertAt > sectionStart) {
+                val lineEnd = insertAt - 1
+                val lineStart = text.lastIndexOf('\n', lineEnd - 1) + 1
+                val line = text.substring(lineStart, lineEnd)
+                if (line.isBlank()) {
+                    insertAt = lineStart
+                } else {
+                    break
+                }
+            }
             buildString {
                 append(text, 0, insertAt)
                 append(entry).append('\n')
