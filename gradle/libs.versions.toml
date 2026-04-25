@@ -1,6 +1,6 @@
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.3.21" }
-intelij-platform = { id = "org.jetbrains.intellij.platform", version = "2.14.0" }
+intelij-platform = { id = "org.jetbrains.intellij.platform", version = "2.15.0" }
 axion-release = { id = "pl.allegro.tech.build.axion-release", version = "1.21.1" }
 test-logger = { id = "com.adarshr.test-logger", version = "4.0.0" }
 
